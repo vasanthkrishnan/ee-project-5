@@ -3,23 +3,26 @@ import Logo from '../assets/img/logo.png'
 
 export const Login = () => {
   const nameRef = useRef(null)
-  const emailRef = useRef(null)
+  const passwordRef = useRef(null)
   const roleRef = useRef(null)
 
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     const loginData = {
-      name : nameRef.current.value,
-      email : emailRef.current.value,
+      email : nameRef.current.value,
+      password : passwordRef.current.value,
       role : roleRef.current.value
     }
+    console.log(loginData.email)
+    console.log(loginData.password)
+    console.log(loginData.role)
     try {
-      const response = await fetch('/login', {
+      const response = await fetch('http://localhost:5554/login', {
         method : 'POST',
         headers : { 'Content-Type': 'application/json'},
         body : JSON.stringify(loginData)
       })
-
+      if(response.ok) {
       const data = await response.json()
       if(data.role === 'admin') {
         console.log("Admin login successful")
@@ -27,8 +30,13 @@ export const Login = () => {
       else if(data.role === 'student') {
         console.log("Student login successful")
       }
+    }
+    else {
+      const errorDate = await response.json()
+      console.log("Login failed " + errorDate.message)
+    }
     } catch (error) {
-      console.log("login error" + error.message)
+      console.log("login error" + error)
     }
   }
   return (
@@ -41,13 +49,13 @@ export const Login = () => {
                 <div className='h-[70%] w-full flex justify-center items-center'>
                   <form onSubmit={ handleFormSubmit } className='h-full w-[50%] flex flex-col mt-[3rem] gap-5 justify-start items-center'>
                     <input ref={ nameRef } className='border-gray-500 border p-[.5rem] h-[2.5rem] w-[20rem]' type="text" name="" placeholder='Username' id="" />
-                    <input ref={ emailRef  } className='border-gray-500 border p-[.5rem] h-[2.5rem] w-[20rem]' type="password" name="" placeholder='Password' id="" />
+                    <input ref={ passwordRef  } className='border-gray-500 border p-[.5rem] h-[2.5rem] w-[20rem]' type="password" name="" placeholder='Password' id="" />
                     <select ref={ roleRef } className='border-gray-500 border p-[.5rem] h-[2.5rem] w-[20rem]'>
                       <option>Select Role</option>
                       <option>Student</option>
-                      <option>Warden</option>
+                      <option>Admin</option>
                     </select>
-                    <button className='p-[.5rem] h-[3rem] w-[20rem] bg-[#008000] text-white font-bold text-lg'>Log in</button>
+                    <button type='submit' className='p-[.5rem] h-[3rem] w-[20rem] bg-[#008000] text-white font-bold text-lg'>Log in</button>
                   </form>
                 </div>
             </div>
