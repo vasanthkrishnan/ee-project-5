@@ -14,7 +14,7 @@ app.post('/login', async (req, res) => {
 
          const isMatch = await compare(password, user.password)
          if(!isMatch) {
-            return res.status(404).json({ message : "Invalid Credentails !"})
+            return res.status(401).json({ message : "Invalid Credentails !"})
          }
 
          if(user.role === 'admin') {

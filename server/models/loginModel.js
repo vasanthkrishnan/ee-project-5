@@ -11,11 +11,12 @@ const loginSchema = new mongoose.Schema({
         required : true
     },
     role : {
+        type : String,
         enum : ['Student', 'Warden'],
         required : true
     }
 })
 
 
-const login = mongoose.model("login", loginSchema)
+const login = mongoose.model("users", loginSchema)
 module.exports = login
