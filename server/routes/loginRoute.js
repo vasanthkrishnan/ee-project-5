@@ -6,7 +6,6 @@ const User = require('../models/loginModel');
 
 
 router.post('/', async (req, res) => {
-   console.log("Login route hit")
     const { email, password, role } = req.body
     if(!role) {
       return res.status(400).json({message : "Role is required"})
@@ -16,8 +15,6 @@ router.post('/', async (req, res) => {
          if(!user) {
             return res.status(404).json({ message : "User not found"})
          } 
-         console.log("User found:", user);
-         console.log("Password from request:", password);
          // const isMatch = password === user.password
          // if(!isMatch) {
          //    return res.status(401).json({ message : "Invalid Credentails !"})

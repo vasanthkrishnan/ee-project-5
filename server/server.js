@@ -18,6 +18,4 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Running in port ${port}`)
-    console.log('Routes:');
-    console.log('/login: POST');
 })
