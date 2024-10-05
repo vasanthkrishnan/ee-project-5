@@ -4,19 +4,19 @@ const loginSchema = new mongoose.Schema({
     name : {
         type : String,
         required : true,
-        unique : true
+        unique : true,
     },
     email : {
         type : String,
-        required : true
+        required : true,
     },
     role : {
         type : String,
-        enum : ['Student', 'Warden'],
-        required : true
+        enum : ['Student', 'Admin'],
+        required : true,
     }
 })
 
 
-const login = mongoose.model("users", loginSchema)
+const login = mongoose.model("login", loginSchema)
 module.exports = login

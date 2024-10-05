@@ -1,35 +1,37 @@
 const express = require ('express')
 const router = express.Router()
 const User = require('../models/loginModel');
-const { compare } = require('bcrypt');
-const app = express();
 
-app.use(express.json())
-app.post('/login', async (req, res) => {
+
+
+
+router.post('/', async (req, res) => {
+   console.log("Login route hit")
     const { email, password, role } = req.body
+    if(!role) {
+      return res.status(400).json({message : "Role is required"})
+    }
     try {
         const user = await User.findOne({ email })
          if(!user) {
             return res.status(404).json({ message : "User not found"})
          } 
+         console.log("User found:", user);
+         console.log("Password from request:", password);
+         // const isMatch = password === user.password
+         // if(!isMatch) {
+         //    return res.status(401).json({ message : "Invalid Credentails !"})
+         // }
 
-         const isMatch = await compare(password, user.password)
-         if(!isMatch) {
-            return res.status(401).json({ message : "Invalid Credentails !"})
-         }
-
-         if(user.role.toLocaleLowerCase() === 'admin') {
-            res.status(200).json({ message : "Admin login Sucessfully", role : 'admin'})
-         }
-         else if(user.role.toLocaleLowerCase() === 'student') {
-            res.status(200).json({ message : "Student login successfully", role : 'student'})
+         if( user.role && user.role.toLowerCase() === role.toLowerCase()) {
+            return res.status(200).json({ message: `${role} login successful`, role: user.role });
          }
          else {
-            res.status(400).json({ message : "Invalid role"})
+            return res.status(400).json({ message : "Invalid role"})
          }
     } catch (error) {
         console.log(error.message)
-        res.status(500).json({ message : "Server error" })
+        return res.status(500).json({ message : "Server error" })
     }
 })
 
