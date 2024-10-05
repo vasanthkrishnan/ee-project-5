@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import Logo from '../assets/img/logo.png'
+import { Navigate } from 'react-router-dom'
 
 export const Login = () => {
   const nameRef = useRef(null)
@@ -19,18 +20,22 @@ export const Login = () => {
       password : passwordRef.current.value,
       role : role,
     }
-    console.log(loginData.email)
-    console.log(loginData.password)
-    console.log(loginData.role)
     try {
       const response = await fetch('http://localhost:5555/login', {
         method : 'POST',
         headers : { 'Content-Type': 'application/json'},
         body : JSON.stringify(loginData)
       })
-      if(response.ok) {
+
+      const ADMIN_ROLE = 'admin'
+      const STUDENT_ROLE = 'student'
+        if(response.ok) {
         const data = await response.json()
         console.log(`${data.role} login successful`)
+        if(data.role.toLowerCase() === ADMIN_ROLE.toLowerCase()) {
+          console.log("Admin redirect")
+          return <Navigate to='/admin/index.html' replace />
+        }
       }
     else {
       const errorDate = await response.json()
