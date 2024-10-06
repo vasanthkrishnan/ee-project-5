@@ -1,12 +1,14 @@
 import React, { useRef } from 'react'
 import Logo from '../assets/img/logo.png'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
+
+  const navigate = useNavigate()
   const nameRef = useRef(null)
   const passwordRef = useRef(null)
   const roleRef = useRef(null)
-
+  
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     const role = roleRef.current.value
@@ -34,7 +36,11 @@ export const Login = () => {
         console.log(`${data.role} login successful`)
         if(data.role.toLowerCase() === ADMIN_ROLE.toLowerCase()) {
           console.log("Admin redirect")
-          return <Navigate to='/admin/index.html' replace />
+          navigate('../admin/Admin.jsx')
+        }
+        else if(data.role.toLowerCase() === STUDENT_ROLE.toLowerCase()) {
+          console.log("Student redirect")
+          navigate('../student/Student.jsx')
         }
       }
     else {
