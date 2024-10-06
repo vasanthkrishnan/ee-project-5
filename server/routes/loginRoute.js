@@ -6,6 +6,8 @@ const User = require('../models/loginModel');
 
 
 router.post('/', async (req, res) => {
+   //  const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+   //  console.log(userIp)
     const { email, password, role } = req.body
     if(!role) {
       return res.status(400).json({message : "Role is required"})
