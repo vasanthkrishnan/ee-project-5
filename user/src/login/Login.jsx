@@ -1,6 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Logo from '../assets/img/logo.png'
 import { useNavigate } from 'react-router-dom'
+import { Loader, Check, AlertTriangle } from 'lucide-react'
+import { toast, Toaster } from 'sonner'
+
 
 export const Login = () => {
 
@@ -8,13 +11,19 @@ export const Login = () => {
   const nameRef = useRef(null)
   const passwordRef = useRef(null)
   const roleRef = useRef(null)
+
+  const [loader, setLoader] = useState(false)
   
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     const role = roleRef.current.value
 
     if(role === "Select Role") {
-      console.log("Role is required")
+      toast.error("Role is Required !", {
+        className: 'bg-green-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+        icon: <AlertTriangle />,
+        duration: 1000,
+      })
       return
     }
     const loginData = {
@@ -36,23 +45,40 @@ export const Login = () => {
         console.log(`${data.role} login successful`)
         if(data.role.toLowerCase() === ADMIN_ROLE.toLowerCase()) {
           console.log("Admin redirect")
-          navigate('../admin/Admin.jsx')
+          setLoader(true)
+          setTimeout(() => {
+            setLoader(false)
+            navigate('../admin/Admin.jsx')
+          },1000)
         }
         else if(data.role.toLowerCase() === STUDENT_ROLE.toLowerCase()) {
           console.log("Student redirect")
-          navigate('../student/Student.jsx')
+          setLoader(true)
+          setTimeout(() => {
+            setLoader(false)
+            navigate('../student/Student.jsx')
+          }, 1000);
         }
       }
     else {
       const errorDate = await response.json()
-      console.log("Login failed " + errorDate.message)
+      toast.error(errorDate.message, {
+        className: 'bg-green-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+        icon: <AlertTriangle />,
+        duration: 1000,
+      })
     }
     } catch (error) {
-      console.log("login error" + error)
+      toast.error("Login Error !", {
+        className: 'bg-green-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+        icon: <AlertTriangle />,
+        duration: 1000,
+      })
     }
   }
   return (
     <>
+      <Toaster position='top-right' richColors />
         <div className='h-screen w-screen flex justify-center items-start mt-[4rem]'>
             <div className='h-[50%] w-[47%] flex flex-col border border-gray-300 '>
                 <div className='h-[30%] w-full bg-[#f5f5f5] border-b border-gray-300'>
@@ -72,6 +98,13 @@ export const Login = () => {
                 </div>
             </div>
         </div>
+        {
+          loader && (
+            <div className='fixed top-5 left-1/2 transform -translate-x-1/2'>
+              <Loader className='animate-spin text-gray-700' size={32} />
+            </div>
+          )
+        }
     </>
   )
 }
