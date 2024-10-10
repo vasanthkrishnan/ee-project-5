@@ -80,7 +80,7 @@ export const Login = () => {
     <>
       <Toaster position='top-right' richColors />
         <div className='h-screen w-screen flex justify-center items-start mt-[4rem]'>
-            <div className='h-[50%] w-[47%] flex flex-col border border-gray-300 '>
+            <div className='h-[55%] w-[47%] flex flex-col border border-gray-300 '>
                 <div className='h-[30%] w-full bg-[#f5f5f5] border-b border-gray-300'>
                     <img src= { Logo } alt="logo" />
                 </div>
