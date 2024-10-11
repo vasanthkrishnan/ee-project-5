@@ -4,6 +4,7 @@ const cors = require('cors')
 const app = express()
 const dbConnection = require('./config/db')
 const login = require('./routes/loginRoute')
+const student = require('./models/studentRegisterModel')
 
 app.use(express.json())
 app.use(cors())
@@ -11,6 +12,7 @@ app.use(cors())
 const port = process.env.PORT || 7777
 
 app.use('/login', login)
+app.use('/logins', student)
 
 app.get('/', (req, res) => {
     res.status(200).json("Welcome")
