@@ -1,7 +1,11 @@
-import { Check, Menu } from 'lucide-react'
+import { Check } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { toast, Toaster } from 'sonner'
 import AdminNavbar from './component/AdminNavbar'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import WebLayout from './layouts/WebLayout'
+import RegisterStudent from './pages/RegisterStudent'
+import StudentCompilents from './pages/StudentCompilents'
 
 export const Admin = () => {
 
@@ -16,8 +20,14 @@ export const Admin = () => {
   },[])
   return (
     <>
-    <Toaster position='top-right' richColors />
-    <AdminNavbar />
+      <Toaster position='top-right' richColors />
+      <AdminNavbar />
+        <Routes>
+          <Route element={ <WebLayout /> }>
+            <Route  path='studentcomplients' element={ <StudentCompilents />} />
+            <Route path='registerstudent' element={ <RegisterStudent />} />
+          </Route>
+        </Routes>
     </>
   )
 }

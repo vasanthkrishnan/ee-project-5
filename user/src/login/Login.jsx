@@ -93,7 +93,7 @@ export const Login = () => {
                       <option value="student">Student</option>
                       <option value="admin">Admin</option>
                     </select>
-                    <button type='submit' className='p-[.5rem] h-[3rem] w-[20rem] bg-[#008000] text-white font-bold text-lg'>Log in</button>
+                    <button type='submit' className='p-[.5rem] h-[3rem] w-[20rem] bg-[#008000] hover:bg-[#005700] text-white font-bold text-lg'>Log in</button>
                   </form>
                 </div>
             </div>

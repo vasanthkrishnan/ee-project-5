@@ -10,10 +10,12 @@ export const AdminNavbar = () => {
 
     const sideBarTitle = [
         {
-            title:"one"
+            title:"Student Complients",
+            url: "studentcomplients",
         },
         {
-            title:"Two"
+            title:"Register Students",
+            url: "registerstudent",
         },
         {
             title:"Three"
@@ -30,7 +32,7 @@ export const AdminNavbar = () => {
     ]
   return (
     <>
-        <div className='h-[8vh] w-full flex flex-row gap-3 bg-[#F8F8F8] justify-start items-center shadow-md'>
+        <div className='h-[8vh] w-full fixed overflow-y-auto overflow-x-hidden flex flex-row gap-3 bg-[#F8F8F8] justify-start items-center shadow-md'>
             <div className='bg-[#E2DFD2] h-10 w-12 flex justify-center items-center ml-3 hover:cursor-pointer' onClick={() => setSideBarOpen(true)}><Menu className='h-6 w-6' /></div>
             <div className='h-[80%] w-[3.5rem] border-none flex justify-center items-center'><img className='h-9 w-10' src={ SIET_logo } alt="" /></div>
             <div className='h-[80%] w-[16rem] flex justify-center text-gray-500 text-2xl items-center'>SIET Hostel Attendance</div>
@@ -49,7 +51,7 @@ export const AdminNavbar = () => {
                 <ul className='space-y-4'>
                     {
                         sideBarTitle.map((data, index) => (
-                            <NavLink key={ index } >
+                            <NavLink key={ index } to={ data.url } >
                                 <li className= ' text-gray-700  text-[18px] hover:text-gray-700 py-2 px-2 rounded-md hover:bg-[#d3d3d3]'>{data.title}</li>
                             </NavLink>
                         ))

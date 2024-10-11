@@ -8,13 +8,15 @@ import Student from './student/Student'
 export const App = () => {
   return (
     <>
+    <div className='h-screen w-screen overflow-x-hidden overflow-y-auto'>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={ <Login /> } />
-          <Route path='/admin/Admin.jsx' element={ <Admin /> } />
-          <Route path='/student/Student.jsx' element= {<Student />} />
+          <Route path='/admin/*' element={ <Admin /> } />
+          <Route path='/student/*' element= {<Student />} />
         </Routes>
       </BrowserRouter>
+    </div>
     </>
   )
 }
