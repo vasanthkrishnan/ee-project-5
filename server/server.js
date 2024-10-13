@@ -4,7 +4,7 @@ const cors = require('cors')
 const app = express()
 const dbConnection = require('./config/db')
 const login = require('./routes/loginRoute')
-const student = require('./models/studentRegisterModel')
+const student = require('./routes/studentRegisterRoute')
 
 app.use(express.json())
 app.use(cors())
