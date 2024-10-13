@@ -18,10 +18,12 @@ export const AdminNavbar = () => {
             url: "registerstudent",
         },
         {
-            title:"Three"
+            title:"Attendance",
+            url: "attendance",
         },
         {
-            title:"Four"
+            title:"Student",
+            url: "student",
         },
         {
             title:"Five"
@@ -42,7 +44,7 @@ export const AdminNavbar = () => {
         </div>
         
         <div
-            className={`fixed top-[8vh] left-0 h-[calc(100vh-8vh)] mt-3 shadow-md bg-[#f8f8f8] text-gray-500 transform transition-transform duration-[1000ms] ease-in-out ${
+            className={`fixed top-[8vh] left-0 h-[calc(100vh-8vh)] mt-3 z-50 shadow-md bg-[#f8f8f8] text-gray-500 transform transition-transform duration-[1000ms] ease-in-out ${
             sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             <div className='w-[15.2rem] flex flex-col p-4'>
                 <div className='flex justify-between items-center border-b border-gray-600 pb-2 mb-4'>

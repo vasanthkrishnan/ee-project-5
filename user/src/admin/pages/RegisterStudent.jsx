@@ -1,5 +1,7 @@
 import React, { useRef } from 'react'
 import { addStudentData } from '../../service/api'
+import { Toaster, toast } from 'sonner'
+import { Check } from 'lucide-react'
 
 export const RegisterStudent = () => {
 
@@ -35,15 +37,24 @@ export const RegisterStudent = () => {
     try {
       const response = await addStudentData(studentData)
       if(response.status === 200) {
-        console.log("Added")
+        toast.success("Student Added Successfully !", {
+          className: 'bg-green-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+          icon: <Check />,
+          duration: 1000,
+        })
       }
     } catch (error) {
-      console.log(error.message)
+      toast.error(errorDate.message, {
+        className: 'bg-red-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+        icon: <AlertTriangle />,
+        duration: 1000,
+      })
     }
   }
 
   return (
     <>
+    <Toaster position='top-right' richColors />
         <div className='min-h-screen w-screen mt-20 overflow-y-auto overflow-x-hidden flex justify-center items-start pt-10'>
         <div className='w-full max-w-4xl bg-[#f5f5f5] shadow-lg rounded-md flex justify-center items-center'>
           <form className='w-[90%] py-10 flex flex-col justify-start items-center' onSubmit={handleStudentData}>
@@ -138,13 +149,13 @@ export const RegisterStudent = () => {
               />
               <select ref={ roleRef } className='w-full md:w-1/2 p-3 border border-gray-400 rounded-md text-gray-700 placeholder-gray-500 placeholder:text-lg hover:border-green-700' required >
                 <option value="" hidden>Role</option>
-                <option value="male">Student</option>
-                <option value="female">Admin</option>
+                <option value="student">Student</option>
+                <option value="admin">Admin</option>
               </select>
             </div>
             <button 
               className='w-full md:w-1/2 mt-6 p-3 bg-[#008000] text-white rounded-md hover:bg-[#005700] transition-colors duration-300' type="submit">
-              Submit
+              Register
             </button>
           </form>
         </div>
