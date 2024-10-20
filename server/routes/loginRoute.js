@@ -8,8 +8,10 @@ const allowedWifiIp = "10.1.5.114"
 
 router.post('/', async (req, res) => {
     try {
-        const userIp = getPrivateIpAddress()
+        const { userIp, mac } = getNetworkInfo()
+        const formattedMac = formatMacAddress(mac)
         console.log('User Private IP:', userIp)
+        console.log('Mac Address: ', formattedMac)
 
         const { email, password, role } = req.body
         if (!role) {
@@ -45,17 +47,28 @@ router.post('/', async (req, res) => {
     }
 });
 
-function getPrivateIpAddress() {
+function getNetworkInfo() {
     const networkInterfaces = os.networkInterfaces()
-    for (const interfaceKey in networkInterfaces) {
-        const networkInterface = networkInterfaces[interfaceKey]
-        for (const net of networkInterface) {
-            if (net.family === 'IPv4' && !net.internal) {
-                return net.address
+    let privateIp = null
+    let macAddress = null
+
+    for(const interfaceKey in networkInterfaces) {
+        const netInterface = networkInterfaces[interfaceKey]
+        for(const net of netInterface) {
+            if(net.family === 'IPv4' && !net.internal) {
+                privateIp = net.address
+                macAddress = net.mac;
+                return { userIp : privateIp, mac : macAddress }
             }
         }
     }
-    return null;
+    return { userIp : privateIp, mac: macAddress }
 }
+
+function formatMacAddress(mac) {
+    return mac.split(":").map(segment => segment.toUpperCase()).join('-')
+}
+
+
 
 module.exports = router;
