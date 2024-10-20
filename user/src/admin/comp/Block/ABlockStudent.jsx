@@ -89,7 +89,7 @@ export const ABlockStudent = () => {
             const phoneNumber = student.phone.toString()
             const roomNumber = student.room.toString()
             const year = student.year.toString()
-            const department = student.department.toString()
+            const department = student.department.toLowerCase()
             const email = student.email.toLowerCase()
             const mac = `${student.macOne} ${student.macTwo}`.toLowerCase()
             return fullName.includes(value) || phoneNumber.includes(value) || roomNumber.includes(value)
@@ -278,7 +278,6 @@ export const ABlockStudent = () => {
           </form>
         </div>
       </div>
-
                 )
             }
         </>
