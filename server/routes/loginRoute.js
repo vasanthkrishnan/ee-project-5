@@ -10,8 +10,6 @@ router.post('/', async (req, res) => {
     try {
         const { userIp, mac } = getNetworkInfo()
         const formattedMac = formatMacAddress(mac)
-        console.log('User Private IP:', userIp)
-        console.log('Mac Address: ', formattedMac)
 
         const { email, password, role } = req.body
         if (!role) {
@@ -30,7 +28,12 @@ router.post('/', async (req, res) => {
 
         if (role.toLowerCase() === 'student') {
          if (userIp === allowedWifiIp) {
-             return res.status(200).json({ message: "Student login successful", role: user.role })
+            if(user.macOne && user.macOne.includes(formattedMac) || user.macTwo && user.macTwo.includes(formattedMac)) {
+                return res.status(200).json({ message: "Student login successful", role: user.role })
+            }
+            else {
+                return res.status(403).json({message: "Device is not registered"})
+            }
          } else {
              return res.status(403).json({ message: "Please Connect to Hostel Wifi" })
          }

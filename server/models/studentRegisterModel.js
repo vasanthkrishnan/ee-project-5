@@ -28,10 +28,12 @@ const studentSchema = new mongoose.Schema({
     macOne: {
         type: String,
         required: true,
+        unique: true,
     },
     macTwo: {
         type: String,
         required: false,
+        unique: true,
     },
     email: {
         type: String,
