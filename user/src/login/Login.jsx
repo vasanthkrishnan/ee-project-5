@@ -42,9 +42,7 @@ export const Login = () => {
       const STUDENT_ROLE = 'student'
         if(response.ok) {
         const data = await response.json()
-        console.log(`${data.role} login successful`)
         if(data.role.toLowerCase() === ADMIN_ROLE.toLowerCase()) {
-          console.log("Admin redirect")
           setLoader(true)
           setTimeout(() => {
             setLoader(false)
@@ -52,7 +50,6 @@ export const Login = () => {
           },1000)
         }
         else if(data.role.toLowerCase() === STUDENT_ROLE.toLowerCase()) {
-          console.log("Student redirect")
           setLoader(true)
           setTimeout(() => {
             setLoader(false)
