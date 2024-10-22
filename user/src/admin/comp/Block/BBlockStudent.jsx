@@ -104,6 +104,9 @@ export const BBlockStudent = () => {
                                         <span className="font-medium">Year:</span> { data.year }
                                     </div>
                                     <div className='text-[.96em]'>
+                                        <span className="font-medium">Block:</span> { data.block }
+                                    </div>
+                                    <div className='text-[.96em]'>
                                         <span className="font-medium">Room No:</span> { data.room }
                                     </div>
                                     <div className='text-[.96em]'>

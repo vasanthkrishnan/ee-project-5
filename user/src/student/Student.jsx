@@ -2,6 +2,8 @@ import React from 'react'
 import { Toaster, toast } from 'sonner'
 import { useEffect } from 'react';
 import { Check, X } from 'lucide-react';
+import StudentNavbar from './component/StudentNavbar';
+
 
 export const Student = () => {
   useEffect(() => {
@@ -14,7 +16,7 @@ export const Student = () => {
   return (
     <>
     <Toaster position='top-right' richColors />
-    <div>Student</div>
+    <StudentNavbar />
     </>
   )
 }

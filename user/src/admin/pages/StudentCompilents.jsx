@@ -2,7 +2,7 @@ import React from 'react'
 
 export const StudentCompilents = () => {
   return (
-    <div>StudentCompilents</div>
+    <div className='h-full w-full flex justify-center items-center'>StudentCompilents</div>
   )
 }
 

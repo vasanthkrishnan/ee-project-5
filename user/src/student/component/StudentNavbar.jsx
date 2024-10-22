@@ -5,29 +5,25 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 
-export const AdminNavbar = () => {
+export const StudentNavbar = () => {
     const [sidebarOpen, setSideBarOpen] = useState(false)
 
     const sideBarTitle = [
         {
-            title: "Open Attendance",
-            url:"openattendance",
+            title:"one",
+            url: "one",
         },
         {
-            title:"Student Complients",
-            url: "studentcomplients",
+            title:"Two",
+            url: "tow",
         },
         {
-            title:"Register Students",
-            url: "registerstudent",
+            title:"Three",
+            url: "three",
         },
         {
-            title:"Attendance",
-            url: "attendance",
-        },
-        {
-            title:"Student",
-            url: "student",
+            title:"Four",
+            url: "four",
         },
         {
             title:"Five"
@@ -43,7 +39,7 @@ export const AdminNavbar = () => {
             <div className='h-[80%] w-[3.5rem] border-none flex justify-center items-center'><img className='h-9 w-10' src={ SIET_logo } alt="" /></div>
             <div className='h-[80%] w-[16rem] flex justify-center text-gray-500 text-2xl items-center'>SIET Hostel Attendance</div>
             <div className='h-[90%] w-[15rem] ml-auto mr-3'>
-                <div className='h-full w-full text-2xl text-gray-500 flex justify-center items-center'>Admin Dashboard !</div>
+                <div className='h-full w-full text-2xl text-gray-500 flex justify-center items-center'>Student Dashboard !</div>
             </div>
         </div>
         
@@ -69,4 +65,4 @@ export const AdminNavbar = () => {
   )
 }
 
-export default AdminNavbar
+export default StudentNavbar

@@ -46,14 +46,14 @@ export const Login = () => {
           setLoader(true)
           setTimeout(() => {
             setLoader(false)
-            navigate('../admin/Admin.jsx')
+            navigate('../admin')
           },1000)
         }
         else if(data.role.toLowerCase() === STUDENT_ROLE.toLowerCase()) {
           setLoader(true)
           setTimeout(() => {
             setLoader(false)
-            navigate('../student/Student.jsx')
+            navigate('../student/')
           }, 1000);
         }
       }

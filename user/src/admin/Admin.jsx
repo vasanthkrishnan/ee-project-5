@@ -2,7 +2,7 @@ import { Check } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { toast, Toaster } from 'sonner'
 import AdminNavbar from './component/AdminNavbar'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import WebLayout from './layouts/WebLayout'
 import RegisterStudent from './pages/RegisterStudent'
 import StudentCompilents from './pages/StudentCompilents'
@@ -12,6 +12,7 @@ import ABlockStudent from './comp/Block/ABlockStudent'
 import BBlockStudent from './comp/Block/BBlockStudent'
 import CBlockStudent from './comp/Block/CBlockStudent'
 import DBlockStudent from './comp/Block/DBlockStudent'
+import OpenAttendance from './pages/OpenAttendance'
 
 export const Admin = () => {
 
@@ -26,9 +27,9 @@ export const Admin = () => {
   return (
     <>
       <Toaster position='top-right' richColors />
-      <AdminNavbar />
         <Routes>
           <Route element={ <WebLayout /> }>
+            <Route path='openattendance' element= { <OpenAttendance />} />
             <Route  path='studentcomplients' element={ <StudentCompilents />} />
             <Route path='registerstudent' element={ <RegisterStudent />} />
             <Route path='attendance' element={ <Attendance />} />
@@ -37,6 +38,7 @@ export const Admin = () => {
             <Route path='bblockstudent' element= { <BBlockStudent />} />
             <Route path='cblockstudent' element= { <CBlockStudent />} />
             <Route path='dblockstudent' element= { <DBlockStudent />} />
+            <Route path="/" element={<Navigate to="openattendance" replace />} />
           </Route>
         </Routes>
     </>

@@ -7,7 +7,8 @@ export const WebLayout = () => {
   return (
     <>
         <div className='h-screen w-screen overflow-x-hidden'>
-            <div className='h-[92vh] w-screen flex flex-col justify-center items-center'>
+        <AdminNavbar />
+            <div className='h-[92vh] w-screen'>
                 <Suspense fallback={"loading..."}>
                     <Outlet />
                 </Suspense>
