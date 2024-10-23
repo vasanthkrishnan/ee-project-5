@@ -15,6 +15,12 @@ const loginSchema = new mongoose.Schema({
         enum : ['Student', 'Admin'],
         required : true,
     },
+    firstName : {
+        type: String,
+    },
+    lastName : {
+        type: String,
+    },
     macOne : {
         type : String,
     },

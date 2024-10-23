@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
         if (role.toLowerCase() === 'student') {
          if (userIp === allowedWifiIp) {
             if(user.macOne && user.macOne.includes(formattedMac) || user.macTwo && user.macTwo.includes(formattedMac)) {
-                return res.status(200).json({ message: "Student login successful", role: user.role })
+                return res.status(200).json({ message: "Student login successful", role: user.role, firstName: user.firstName, lastName: user.lastName })
             }
             else {
                 return res.status(403).json({message: "Device is not registered"})
