@@ -50,6 +50,8 @@ export const Login = () => {
           },1000)
         }
         else if(data.role.toLowerCase() === STUDENT_ROLE.toLowerCase()) {
+          const userName = data.firstName + " " + data.lastName
+          localStorage.setItem('userName', userName)
           setLoader(true)
           setTimeout(() => {
             setLoader(false)
