@@ -37,4 +37,18 @@ router.delete('/delete/:id', async (req, res) => {
     }
 })
 
+router.put('/edit/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        const currentData = await Student.findById({_id: id})
+        if(!currentData) {
+            return res.status(500).json("No data Available")
+        }
+        const updateProject = await Student.findByIdAndUpdate(id, req.body, {new: true})
+        res.status(200).json("Updated...")
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+})
+
 module.exports = router

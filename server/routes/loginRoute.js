@@ -4,7 +4,8 @@ const os = require('os')
 const router = express.Router()
 const User = require('../models/loginModel')
 
-const allowedWifiIp = "10.1.5.114"
+const allowedWifiIp_A = "10.1.5.114"
+const allowedWifiIp_C = "10.1.2.238"
 
 router.post('/', async (req, res) => {
     try {
@@ -27,7 +28,7 @@ router.post('/', async (req, res) => {
         // }
 
         if (role.toLowerCase() === 'student') {
-         if (userIp === allowedWifiIp) {
+         if (userIp === allowedWifiIp_C || userIp === allowedWifiIp_A) {
             if(user.macOne && user.macOne.includes(formattedMac) || user.macTwo && user.macTwo.includes(formattedMac)) {
                 return res.status(200).json({ message: "Student login successful", role: user.role, firstName: user.firstName, lastName: user.lastName })
             }

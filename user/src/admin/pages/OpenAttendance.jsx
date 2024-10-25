@@ -1,67 +1,80 @@
-import { ClipboardListIcon, StopCircle } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import { ClipboardListIcon, StopCircle } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';  // Import axios for making API requests
 
 export const OpenAttendance = () => {
     const [openAttendance, setOpenAttendance] = useState(() => {
-        const storedValue = localStorage.getItem('isOpen')
-        const expirationTime = localStorage.getItem('expirationTime')
-        const currentTime = new Date().getTime()
+        const storedValue = localStorage.getItem('isOpen');
+        const expirationTime = localStorage.getItem('expirationTime');
+        const currentTime = new Date().getTime();
 
         if (storedValue === 'true' && expirationTime && currentTime < expirationTime) {
-            return true
+            return true;
         }
-        return false
+        return false;
     });
 
-    const [remainingTime, setRemainingTime] = useState(0)
+    const [remainingTime, setRemainingTime] = useState(0);
 
     useEffect(() => {
         if (openAttendance) {
-            const expirationTime = localStorage.getItem('expirationTime')
-            const currentTime = new Date().getTime()
-            const timeLeft = expirationTime - currentTime
+            const expirationTime = localStorage.getItem('expirationTime');
+            const currentTime = new Date().getTime();
+            const timeLeft = expirationTime - currentTime;
 
             if (timeLeft > 0) {
-                setRemainingTime(Math.floor(timeLeft / 1000))
+                setRemainingTime(Math.floor(timeLeft / 1000));
 
                 const interval = setInterval(() => {
                     setRemainingTime((prev) => {
                         if (prev <= 1) {
-                            clearInterval(interval)
-                            setOpenAttendance(false)
-                            return 0
+                            clearInterval(interval);
+                            setOpenAttendance(false);
+                            return 0;
                         }
-                        return prev - 1
-                    })
-                }, 1000)
+                        return prev - 1;
+                    });
+                }, 1000);
 
-                return () => clearInterval(interval)
+                return () => clearInterval(interval);
             } else {
-                setOpenAttendance(false)
+                setOpenAttendance(false);
             }
         } else {
-            localStorage.removeItem('expirationTime')
+            localStorage.removeItem('expirationTime');
         }
     }, [openAttendance]);
 
-    const handleOpenAttendance = () => {
-        setOpenAttendance(true)
-        const expirationTime = new Date().getTime() + 90 * 60 * 1000
-        localStorage.setItem('expirationTime', expirationTime)
-        setRemainingTime(90 * 60)
-        localStorage.setItem('isOpen', 'true')
+    const handleOpenAttendance = async () => {
+        setOpenAttendance(true);
+        const expirationTime = new Date().getTime() + 90 * 60 * 1000;
+        localStorage.setItem('expirationTime', expirationTime);
+        setRemainingTime(90 * 60);
+        localStorage.setItem('isOpen', 'true');
+
+        try {
+            // Make the API call to send SMS notifications
+            const response = await axios.get('http://localhost:5555/send-sms');  // Adjust URL if needed
+            if (response.status === 200) {
+                console.log("SMS notifications sent successfully.");
+            } else {
+                console.error("Failed to send SMS notifications.");
+            }
+        } catch (error) {
+            console.error("Error sending SMS notifications:", error);
+        }
     };
 
     const handleStopAttendance = () => {
-        setOpenAttendance(false)
-        localStorage.removeItem('isOpen')
-        localStorage.removeItem('expirationTime')
+        setOpenAttendance(false);
+        localStorage.removeItem('isOpen');
+        localStorage.removeItem('expirationTime');
     };
 
     const formatTime = (seconds) => {
-        const minutes = Math.floor(seconds / 60)
-        const remainingSeconds = seconds % 60
-        return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
     };
 
     return (

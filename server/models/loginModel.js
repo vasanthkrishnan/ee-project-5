@@ -21,6 +21,9 @@ const loginSchema = new mongoose.Schema({
     lastName : {
         type: String,
     },
+    mobile: {
+        type: Number
+    },
     macOne : {
         type : String,
     },
