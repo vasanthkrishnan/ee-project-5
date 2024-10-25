@@ -51,18 +51,6 @@ export const OpenAttendance = () => {
         localStorage.setItem('expirationTime', expirationTime);
         setRemainingTime(90 * 60);
         localStorage.setItem('isOpen', 'true');
-
-        try {
-            // Make the API call to send SMS notifications
-            const response = await axios.get('http://localhost:5555/send-sms');  // Adjust URL if needed
-            if (response.status === 200) {
-                console.log("SMS notifications sent successfully.");
-            } else {
-                console.error("Failed to send SMS notifications.");
-            }
-        } catch (error) {
-            console.error("Error sending SMS notifications:", error);
-        }
     };
 
     const handleStopAttendance = () => {
