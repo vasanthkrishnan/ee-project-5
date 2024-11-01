@@ -79,7 +79,7 @@ export const OpenAttendance = () => {
                 {openAttendance && (
                     <button
                         onClick={handleStopAttendance}
-                        className='p-3 ml-4 bg-red-600 hover:bg-red-500 shadow-lg rounded-lg font-bold text-white text-xl flex items-center space-x-2 transition-all duration-300'>
+                        className='p-3 ml-4 bg-red-700 hover:bg-red-800 shadow-lg rounded-lg font-bold text-white text-xl flex items-center space-x-2 transition-all duration-300'>
                         <StopCircle className="h-6 w-6" />
                         <span>Stop</span>
                     </button>

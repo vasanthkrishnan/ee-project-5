@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 export const Attendance = () => {
   const [userName, setUserName] = useState(null)
   const canOpenAttendance = localStorage.getItem('isOpen') === 'true'
-  console.log(canOpenAttendance)
   useEffect(() => {
     const storedUserName = localStorage.getItem('userName')
     if(storedUserName) {
