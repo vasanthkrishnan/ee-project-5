@@ -4,7 +4,7 @@ const attendanceSchema = new mongoose.Schema({
     name : String,
     date : String,
     isPresent : Boolean,
-    time : Date
+    timeStamp : Date,
 })
 
 const attendance = mongoose.model("attendance", attendanceSchema)
