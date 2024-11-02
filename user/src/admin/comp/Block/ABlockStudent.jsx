@@ -187,46 +187,144 @@ export const ABlockStudent = () => {
       </div>
 
       {visibleEdit && (
-        <div className='min-h-screen top-0 right-0 absolute w-screen mt-14 overflow-y-auto overflow-x-hidden flex justify-center items-start pt-10 bg-[#fff]'>
-          <div className='w-full max-w-4xl bg-[#f5f5f5] shadow-lg rounded-md relative flex justify-center items-center'>
-            <button
-              onClick={() => setVisibleEdit(false)}
-              className='absolute top-4 right-4 text-gray-500 hover:text-red-600 transition-colors duration-200'
-            >
-              <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={2} stroke='currentColor' className='w-6 h-6'>
-                <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
-              </svg>
-            </button>
+  <div className="min-h-screen top-0 right-0 absolute w-screen mt-14 overflow-y-auto overflow-x-hidden flex justify-center items-start pt-10 bg-gradient-to-br from-gray-100 to-gray-300">
+    <div className="w-full max-w-4xl bg-white shadow-2xl rounded-lg relative p-8">
+      <button
+        onClick={() => setVisibleEdit(false)}
+        className="absolute top-4 right-4 text-gray-400 hover:text-red-600 transition-colors duration-200"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
 
-            <form className='w-[90%] py-10 flex flex-col justify-start items-center' onSubmit={handelEdit}>
-              <h3 className='text-3xl font-semibold mb-8'>Student Information</h3>
-              <div className='w-full mb-6 flex flex-col md:flex-row gap-6'>
-                <input
-                  type='text'
-                  name='firstName'
-                  value={studentFormData.firstName}
-                  onChange={handleInputChange}
-                  placeholder='First Name'
-                  className='w-full md:w-1/2 p-3 border border-gray-400 rounded-md placeholder-gray-500 placeholder:text-lg hover:border-green-700'
-                  required
-                />
-                <input
-                  type='text'
-                  name='lastName'
-                  value={studentFormData.lastName}
-                  onChange={handleInputChange}
-                  placeholder='Last Name'
-                  className='w-full md:w-1/2 p-3 border border-gray-400 rounded-md placeholder-gray-500 placeholder:text-lg hover:border-green-700'
-                  required
-                />
-              </div>
-              <button type='submit' className='px-5 py-3 bg-[#008000] text-white rounded-md hover:bg-[#007500]'>
-                Save Changes
-              </button>
-            </form>
-          </div>
+      <form className="space-y-6" onSubmit={handelEdit}>
+        <h3 className="text-2xl font-bold text-gray-700 text-center mb-4">
+          Student Information
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <input
+            type="text"
+            name="firstName"
+            value={studentFormData.firstName}
+            onChange={handleInputChange}
+            placeholder="First Name"
+            className="p-3 border rounded-lg focus:outline-none focus:border-green-500"
+            required
+          />
+          <input
+            type="text"
+            name="lastName"
+            value={studentFormData.lastName}
+            onChange={handleInputChange}
+            placeholder="Last Name"
+            className="p-3 border rounded-lg focus:outline-none focus:border-green-500"
+            required
+          />
+          <input
+            type="text"
+            name="department"
+            value={studentFormData.department}
+            onChange={handleInputChange}
+            placeholder="Department"
+            className="p-3 border rounded-lg focus:outline-none focus:border-green-500"
+            required
+          />
+          <input
+            type="number"
+            name="Year"
+            value={studentFormData.year}
+            onChange={handleInputChange}
+            placeholder="Year"
+            className="p-3 border rounded-lg focus:outline-none focus:border-green-500"
+            required
+          />
+          <input
+            type="text"
+            name="block"
+            value={studentFormData.block}
+            onChange={handleInputChange}
+            placeholder="Block"
+            className="p-3 border rounded-lg focus:outline-none focus:border-green-500"
+            required
+          />
+          <input
+            type="number"
+            name="roomno"
+            value={studentFormData.room}
+            onChange={handleInputChange}
+            placeholder="Room No."
+            className="p-3 border rounded-lg focus:outline-none focus:border-green-500"
+            required
+          />
+          <input
+            type="text"
+            name="mac1"
+            value={studentFormData.macOne}
+            onChange={handleInputChange}
+            placeholder="MAC Addr-1"
+            className="p-3 border rounded-lg focus:outline-none focus:border-green-500"
+            required
+          />
+          <input
+            type="text"
+            name="mac2"
+            value={studentFormData.macTwo}
+            onChange={handleInputChange}
+            placeholder="MAC Addr-2"
+            className="p-3 border rounded-lg focus:outline-none focus:border-green-500"
+            required
+          />
+          <input
+            type="text"
+            name="username"
+            value={studentFormData.email}
+            onChange={handleInputChange}
+            placeholder="Username"
+            className="p-3 border rounded-lg focus:outline-none focus:border-green-500"
+            required
+          />
+          <input
+            type="text"
+            name="password"
+            value={studentFormData.password}
+            onChange={handleInputChange}
+            placeholder="Password"
+            className="p-3 border rounded-lg focus:outline-none focus:border-green-500"
+            required
+          />
+          <input
+            type="number"
+            name="phone"
+            value={studentFormData.phone}
+            onChange={handleInputChange}
+            placeholder="Phone"
+            className="p-3 border rounded-lg focus:outline-none focus:border-green-500"
+            required
+          />
         </div>
-      )}
+        <button
+          type="submit"
+          className="w-full bg-[#008000] text-white py-3 rounded-lg hover:bg-[#005700] transition duration-200"
+        >
+          Save Changes
+        </button>
+      </form>
+    </div>
+  </div>
+)}
+
     </>
   );
 };
