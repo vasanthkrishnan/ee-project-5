@@ -142,28 +142,28 @@ export const ABlockStudent = () => {
               <div className='w-full border-t border-gray-200 my-3'></div>
               <div className='flex flex-col w-full text-sm text-gray-700 gap-2'>
                 <div className='text-[.96em]'>
-                  <span className='font-medium'>Email:</span> {student.email}
+                  <span className='font-medium'>User name :</span> {student.email}
                 </div>
                 <div className='text-[.96em]'>
-                  <span className='font-medium'>Phone:</span> {student.phone}
+                  <span className='font-medium'>Phone :</span> {student.phone}
                 </div>
                 <div className='text-[.96em]'>
-                  <span className='font-medium'>Department:</span> {student.department}
+                  <span className='font-medium'>Department :</span> {student.department}
                 </div>
                 <div className='text-[.96em]'>
-                  <span className='font-medium'>Year:</span> {student.year}
+                  <span className='font-medium'>Year :</span> {student.year}
                 </div>
                 <div className='text-[.96em]'>
-                  <span className='font-medium'>Block:</span> {student.block}
+                  <span className='font-medium'>Block :</span> {student.block}
                 </div>
                 <div className='text-[.96em]'>
-                  <span className='font-medium'>Room No:</span> {student.room}
+                  <span className='font-medium'>Room No :</span> {student.room}
                 </div>
                 <div className='text-[.96em]'>
-                  <span className='font-medium'>Mac Address 1:</span> {student.macOne}
+                  <span className='font-medium'>Mac Address 1 :</span> {student.macOne}
                 </div>
                 <div className='text-[.96em]'>
-                  <span className='font-medium'>Mac Address 2:</span> {student.macTwo}
+                  <span className='font-medium'>Mac Address 2 :</span> {student.macTwo}
                 </div>
               </div>
               <div className='w-full border-t border-gray-200 my-3'></div>

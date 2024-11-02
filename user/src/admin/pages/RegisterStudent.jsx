@@ -127,8 +127,8 @@ export const RegisterStudent = () => {
               <input 
                 ref={ emailRef }
                 className='w-full md:w-1/2 p-3 border border-gray-400 rounded-md placeholder-gray-500 placeholder:text-lg hover:border-green-700' 
-                type="email" 
-                placeholder='Email' 
+                type="text" 
+                placeholder='User name' 
                 required
               />
               <input 
