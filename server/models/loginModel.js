@@ -29,6 +29,9 @@ const loginSchema = new mongoose.Schema({
     },
     macTwo: {
         type: String,
+    },
+    password : {
+        type: String
     }
 })
 

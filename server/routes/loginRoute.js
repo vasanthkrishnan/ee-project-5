@@ -6,7 +6,7 @@ const User = require('../models/loginModel')
 
 const allowedWifiIp_A = "10.1.5.114"
 // const allowedWifiIp_C = "10.1.2.238"
-const allowedWifiIp_C = "192.168.78.43"
+const allowedWifiIp_C = "192.168.43.43"
 
 router.post('/', async (req, res) => {
     try {
@@ -29,20 +29,30 @@ router.post('/', async (req, res) => {
         // }
 
         if (role.toLowerCase() === 'student') {
-         if (userIp === allowedWifiIp_C || userIp === allowedWifiIp_A) {
-            if(user.macOne && user.macOne.includes(formattedMac) || user.macTwo && user.macTwo.includes(formattedMac)) {
-                return res.status(200).json({ message: "Student login successful", user_id: user._id, role: user.role, email: user.email })
+            if(user.password === password) {
+                if (userIp === allowedWifiIp_C || userIp === allowedWifiIp_A) {
+                   if(user.macOne && user.macOne.includes(formattedMac) || user.macTwo && user.macTwo.includes(formattedMac)) {
+                       return res.status(200).json({ message: "Student login successful", user_id: user._id, role: user.role, email: user.email })
+                   }
+                   else {
+                       return res.status(403).json({message: "Device is not registered"})
+                   }
+                } else {
+                    return res.status(403).json({ message: "Please Connect to Hostel Wifi" })
+                }
             }
             else {
-                return res.status(403).json({message: "Device is not registered"})
+                return res.status(300).json({ message: "Password is wrong !"})
             }
-         } else {
-             return res.status(403).json({ message: "Please Connect to Hostel Wifi" })
-         }
      } 
 
         if (user.role && user.role.toLowerCase() === role.toLowerCase()) {
+            if(user.password === password) {
             return res.status(200).json({ message: `${role} login successful`, role: user.role })
+            }
+            else {
+                return res.status(300).json({ message: "Passwrod is Wrong !"})
+            }
         } else {
             return res.status(400).json({ message: "Invalid role" })
         }
