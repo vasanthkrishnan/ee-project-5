@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { addAttendance, checkAttendance } from '../../service/api';
+import { toast, Toaster } from 'sonner';
 
 export const Attendance = () => {
     const [userName, setUserName] = useState(null);
@@ -45,13 +46,16 @@ export const Attendance = () => {
 
         try {
             const response = await addAttendance(attendanceData);
-            console.log(response.data.message);
             setAttendanceMessage('');
             setAttendanceRecorded(true); 
             localStorage.setItem('attendanceRecorded', 'true'); 
             setIsPresent(false); 
         } catch (error) {
-            console.log(`Error: ${error.message}`);
+            toast.error(errorDate.message, {
+                className: 'bg-green-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
+                icon: <AlertTriangle />,
+                duration: 1000,
+              })
         }
     };
 
@@ -63,6 +67,8 @@ export const Attendance = () => {
     }, []);
 
     return (
+        <>
+        <Toaster position='top-right' richColors />
         <div className="flex items-center justify-center h-screen bg-gray-200">
             {
                 canOpenAttendance ? (
@@ -101,6 +107,7 @@ export const Attendance = () => {
                 )
             }
         </div>
+        </>
     );
 }
 

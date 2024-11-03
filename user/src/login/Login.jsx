@@ -53,7 +53,6 @@ export const Login = () => {
         }
         else if(data.role.toLowerCase() === STUDENT_ROLE.toLowerCase()) {
           const userName = data.email
-          console.log(user_id)
           localStorage.setItem('userName', userName)
           localStorage.setItem('user_id', user_id)
           setLoader(true)
