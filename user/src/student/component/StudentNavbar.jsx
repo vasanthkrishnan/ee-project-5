@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import  SIET_logo  from '../../assets/img/download.jpg'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
@@ -6,6 +6,21 @@ import { NavLink } from 'react-router-dom'
 
 
 export const StudentNavbar = () => {
+
+    const [firstName, setFirstName] = useState(null)
+    const [lastName, setLastName] = useState(null)
+
+    useEffect(() => {
+        const storedFirstName = localStorage.getItem('firstName')
+        const storedLastName = localStorage.getItem('lastName')
+        if(storedFirstName) {
+            setFirstName(storedFirstName)
+        }
+        if(storedLastName) {
+            setLastName(storedLastName)
+        }
+    },[])
+
     const [sidebarOpen, setSideBarOpen] = useState(false)
 
     const sideBarTitle = [
@@ -39,7 +54,7 @@ export const StudentNavbar = () => {
             <div className='h-[80%] w-[3.5rem] border-none flex justify-center items-center'><img className='h-9 w-10' src={ SIET_logo } alt="" /></div>
             <div className='h-[80%] w-[16rem] flex justify-center text-gray-500 text-2xl items-center'>SIET Hostel Attendance</div>
             <div className='h-[90%] w-[15rem] ml-auto mr-3'>
-                <div className='h-full w-full text-2xl text-gray-500 flex justify-center items-center'>Student Dashboard !</div>
+                <div className='h-full w-full text-2xl text-gray-500 flex justify-center items-center'>{ firstName + " " + lastName + " !" }</div>
             </div>
         </div>
         

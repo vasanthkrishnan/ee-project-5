@@ -42,7 +42,8 @@ export const Login = () => {
       const STUDENT_ROLE = 'student'
         if(response.ok) {
         const data = await response.json()
-        const user_id = data.user_id
+        const firstName = data.firstName
+        const lastName = data.lastName
 
         if(data.role.toLowerCase() === ADMIN_ROLE.toLowerCase()) {
           setLoader(true)
@@ -54,7 +55,9 @@ export const Login = () => {
         else if(data.role.toLowerCase() === STUDENT_ROLE.toLowerCase()) {
           const userName = data.email
           localStorage.setItem('userName', userName)
-          localStorage.setItem('user_id', user_id)
+          // localStorage.setItem('user_id', user_id)
+          localStorage.setItem('firstName', firstName)
+          localStorage.setItem('lastName', lastName)
           setLoader(true)
           setTimeout(() => {
             setLoader(false)
