@@ -1,55 +1,70 @@
 import React, { useEffect, useState } from 'react';
-import { addAttendance, checkAttendance } from '../../service/api';
+import { addAttendance, checkAttendance, getStudentDetails } from '../../service/api';
 import { toast, Toaster } from 'sonner';
 
 export const Attendance = () => {
-    const [userName, setUserName] = useState(null);
-    const [isPresent, setIsPresent] = useState(false);
-    const [attendanceMessage, setAttendanceMessage] = useState('');
-    const [attendanceRecorded, setAttendanceRecorded] = useState(false);
-    const canOpenAttendance = localStorage.getItem('isOpen') === 'true';
+    const [userName, setUserName] = useState(null)
+    const [isPresent, setIsPresent] = useState(false)
+    const [attendanceMessage, setAttendanceMessage] = useState('')
+    const [attendanceRecorded, setAttendanceRecorded] = useState(false)
+    const [block, setBlock] = useState(null);
+    const [room, setRoom] = useState(null)
+    const canOpenAttendance = localStorage.getItem('isOpen') === 'true'
 
     useEffect(() => {
-        const storedUserName = localStorage.getItem('userName');
+        const storedUserName = localStorage.getItem('userName')
         if (storedUserName) {
-            setUserName(storedUserName);
-            checkIfAttendanceRecorded(storedUserName);
+            setUserName(storedUserName)
+            fetchStudentDetails(storedUserName)
+            checkIfAttendanceRecorded(storedUserName)
         }
     }, []);
 
+    const fetchStudentDetails = async (name) => {
+        try {
+            const response = await getStudentDetails({ email: name })
+            setBlock(response.data.block)
+            setRoom(response.data.room)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
     const checkIfAttendanceRecorded = async (name) => {
         try {
-            const response = await checkAttendance({ name });
-            setAttendanceMessage(response.data.message);
+            const response = await checkAttendance({ name })
+            setAttendanceMessage(response.data.message)
             if (response.data.recorded) { 
-                setAttendanceRecorded(true);
-                localStorage.setItem('attendanceRecorded', 'true'); 
+                setAttendanceRecorded(true)
+                localStorage.setItem('attendanceRecorded', 'true')
             } else {
-                setAttendanceRecorded(false);
-                localStorage.removeItem('attendanceRecorded'); 
+                setAttendanceRecorded(false)
+                localStorage.removeItem('attendanceRecorded');
             }
         } catch (error) {
-            setAttendanceMessage(error.response.data.message);
+            setAttendanceMessage(error.response.data.message)
         }
-    };
+    }
 
     const handleAttendance = async () => {
         if (!userName) {
-            return;
+            return
         }
 
         const attendanceData = {
             name: userName,
             date: new Date().toDateString(),
             isPresent: isPresent,
-        };
+            block: block,
+            room: room,
+        }
 
         try {
-            const response = await addAttendance(attendanceData);
-            setAttendanceMessage('');
-            setAttendanceRecorded(true); 
-            localStorage.setItem('attendanceRecorded', 'true'); 
-            setIsPresent(false); 
+            const response = await addAttendance(attendanceData)
+            setAttendanceMessage('')
+            setAttendanceRecorded(true)
+            localStorage.setItem('attendanceRecorded', 'true')
+            setIsPresent(false)
         } catch (error) {
             toast.error(errorDate.message, {
                 className: 'bg-green-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
@@ -62,9 +77,9 @@ export const Attendance = () => {
     useEffect(() => {
         const recorded = localStorage.getItem('attendanceRecorded');
         if (recorded === 'true') {
-            setAttendanceRecorded(true);
+            setAttendanceRecorded(true)
         }
-    }, []);
+    }, [])
 
     return (
         <>
@@ -111,4 +126,4 @@ export const Attendance = () => {
     );
 }
 
-export default Attendance;
+export default Attendance
