@@ -4,7 +4,8 @@ const os = require('os')
 const router = express.Router()
 const User = require('../models/loginModel')
 
-const allowedWifiIp_A = "10.1.5.114"
+// const allowedWifiIp_A = "10.1.5.114"
+const allowedWifiIp_A = "10.1.13.204"
 // const allowedWifiIp_C = "10.1.2.238"
 const allowedWifiIp_C = "192.168.43.43"
 
@@ -32,7 +33,7 @@ router.post('/', async (req, res) => {
             if(user.password === password) {
                 if (userIp === allowedWifiIp_C || userIp === allowedWifiIp_A) {
                    if(user.macOne && user.macOne.includes(formattedMac) || user.macTwo && user.macTwo.includes(formattedMac)) {
-                       return res.status(200).json({ message: "Student login successful", user_id: user._id, role: user.role, email: user.email })
+                       return res.status(200).json({ message: "Student login successful", firstName: user.firstName, lastName: user.lastName, role: user.role, email: user.email })
                    }
                    else {
                        return res.status(403).json({message: "Device is not registered"})
