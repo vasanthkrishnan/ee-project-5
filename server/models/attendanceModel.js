@@ -5,6 +5,8 @@ const attendanceSchema = new mongoose.Schema({
     date : String,
     isPresent : Boolean,
     timeStamp : Date,
+    block: String,
+    room: String,
 })
 
 const attendance = mongoose.model("attendance", attendanceSchema)

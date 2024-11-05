@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Attendance = require('../models/attendanceModel')
+const Student = require('../models/studentRegisterModel')
 
 router.post('/check', async (req, res) => {
     const { name } = req.body; 
@@ -18,7 +19,7 @@ router.post('/check', async (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
-    const { name, date, isPresent } = req.body
+    const { name, date, isPresent, block, room } = req.body
     const timeStamp = new Date()
 
     try {
@@ -27,12 +28,29 @@ router.post('/add', async (req, res) => {
             return res.status(400).json({message: 'Already Recorded'})
         }
         else {
-            attendance = new Attendance({ name, date, isPresent, timeStamp })
+            attendance = new Attendance({ name, date, isPresent, timeStamp, block, room })
             await attendance.save()
             return res.status(200).json({message: 'Attendance is Recorded'})
         }
     } catch (error) {
         return res.status(500).json(error.message)
+    }
+})
+
+
+router.post('/get', async (req, res) => {
+    const { email } = req.body
+    if(!email) {
+        return res.status(400).json({ message: "Email is required"})
+    }
+    try {
+        const student = await Student.findOne({ email })
+        if(!student) {
+            return res.status(404).json({ message: "Student not found"})
+        }
+        return res.status(200).json({ block: student.block, room: student.room })
+    } catch (error) {
+        return res.status(500).json({ message: "Server error"})
     }
 })
 
