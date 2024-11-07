@@ -1,36 +1,38 @@
-import React from 'react';
+import React from 'react'
 import { Link } from 'react-router-dom';
 
-export const Student = () => {
-    const studentBlock = [
-        {
-            block: "A",
-            url: "ablockstudent",
-            totalRooms: "10",
-            totalStudent: "100"
-        },
-        {
-            block: "B",
-            url: "bblockstudent",
-            totalRooms: "10",
-            totalStudent: "100"
-        },
-        {
-            block: "C",
-            url: "cblockstudent",
-            totalRooms: "10",
-            totalStudent: "100"
-        },
-        {
-            block: "D",
-            url: "dblockstudent",
-            totalRooms: "10",
-            totalStudent: "100"
-        }
-    ];
+export const Block = () => {
 
-    return (
-        <div className='h-full w-full mt-28 flex gap-8 flex-wrap justify-center items-start'>
+  const studentBlock = [
+    {
+        block: "A",
+        url: "ablockattendance",
+        totalRooms: "10",
+        totalStudent: "100"
+    },
+    {
+        block: "B",
+        url: "bblockattendance",
+        totalRooms: "10",
+        totalStudent: "100"
+    },
+    {
+        block: "C",
+        url: "cblockattendance",
+        totalRooms: "10",
+        totalStudent: "100"
+    },
+    {
+        block: "D",
+        url: "dblockattendance",
+        totalRooms: "10",
+        totalStudent: "100"
+    }
+];
+
+  return (
+    <>
+      <div className='h-full w-full mt-28 flex gap-8 flex-wrap justify-center items-start'>
             {studentBlock.map((block, index) => (
                 <div key={index} className="w-[320px] h-[200px] bg-white border border-gray-300 rounded-lg shadow-lg p-5 transition-transform duration-300 hover:scale-105">
                     <div className="flex items-center justify-between mb-4">
@@ -61,7 +63,9 @@ export const Student = () => {
                 </div>
             ))}
         </div>
-    )
+    </>
+  )
 }
 
-export default Student;
+
+export default Block
