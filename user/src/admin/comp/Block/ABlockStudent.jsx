@@ -71,7 +71,7 @@ export const ABlockStudent = () => {
     }));
   };
 
-  const handelEdit = async (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault()
     try {
       const response = await editStudentData(selectedStudentId, studentFormData)
@@ -209,7 +209,7 @@ export const ABlockStudent = () => {
         </svg>
       </button>
 
-      <form className="space-y-6" onSubmit={handelEdit}>
+      <form className="space-y-6" onSubmit={handleEdit}>
         <h3 className="text-2xl font-bold text-gray-700 text-center mb-4">
           Student Information
         </h3>
@@ -243,7 +243,7 @@ export const ABlockStudent = () => {
           />
           <input
             type="number"
-            name="Year"
+            name="year"
             value={studentFormData.year}
             onChange={handleInputChange}
             placeholder="Year"
@@ -261,7 +261,7 @@ export const ABlockStudent = () => {
           />
           <input
             type="number"
-            name="roomno"
+            name="room"
             value={studentFormData.room}
             onChange={handleInputChange}
             placeholder="Room No."
@@ -270,7 +270,7 @@ export const ABlockStudent = () => {
           />
           <input
             type="text"
-            name="mac1"
+            name="macOne"
             value={studentFormData.macOne}
             onChange={handleInputChange}
             placeholder="MAC Addr-1"
@@ -279,7 +279,7 @@ export const ABlockStudent = () => {
           />
           <input
             type="text"
-            name="mac2"
+            name="macTwo"
             value={studentFormData.macTwo}
             onChange={handleInputChange}
             placeholder="MAC Addr-2"
@@ -288,7 +288,7 @@ export const ABlockStudent = () => {
           />
           <input
             type="text"
-            name="username"
+            name="email"
             value={studentFormData.email}
             onChange={handleInputChange}
             placeholder="Username"

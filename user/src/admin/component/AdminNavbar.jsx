@@ -3,6 +3,7 @@ import  SIET_logo  from '../../assets/img/download.jpg'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import '../../assets/css/style.css'
 
 
 export const AdminNavbar = () => {
@@ -23,7 +24,16 @@ export const AdminNavbar = () => {
         },
         {
             title:"Attendance",
-            url: "attendance",
+            subtopics : [
+                {
+                    title: "Year",
+                    url: "year",
+                },
+                {
+                    title: "Block",
+                    url: "block",
+                }
+            ]
         },
         {
             title:"Student",
@@ -54,12 +64,25 @@ export const AdminNavbar = () => {
                 <div className='flex justify-between items-center border-b border-gray-600 pb-2 mb-4'>
                     <X className='h-6 w-6 hover:cursor-pointer ml-auto' onClick={() => setSideBarOpen(false)}/>
                 </div>
-                <ul className='space-y-4'>
+                <ul className='space-y-1'>
                     {
                         sideBarTitle.map((data, index) => (
+                            <div key={ index } className='relative group'>
                             <NavLink key={ index } to={ data.url } >
                                 <li className= ' text-gray-700  text-[18px] hover:text-gray-700 py-2 px-2 rounded-md hover:bg-[#d3d3d3]'>{data.title}</li>
                             </NavLink>
+
+                            {
+                              data.subtopics && (
+                                <ul className='absolute left-full top-0 ml-1 bg-white shadow-lg rounded-md border border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
+                                    {data.subtopics.map((subtopic, subIndex) => (
+                                        <NavLink key={subIndex} to={subtopic.url} className='block text-gray-950 text-[18px] py-2 px-4 hover:bg-[#d3d3d3]'>
+                                            {subtopic.title}
+                                        </NavLink>
+                                    ))}
+                                </ul>
+                            )}
+                            </div>
                         ))
                     }
                 </ul>
