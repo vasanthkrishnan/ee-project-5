@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { addAttendance, checkAttendance, getStudentDetails } from '../../service/api';
 import { toast, Toaster } from 'sonner';
+import { AlertTriangle } from 'lucide-react';
 
 export const Attendance = () => {
     const [userName, setUserName] = useState(null)
     const [isPresent, setIsPresent] = useState(false)
     const [attendanceMessage, setAttendanceMessage] = useState('')
     const [attendanceRecorded, setAttendanceRecorded] = useState(false)
-    const [block, setBlock] = useState(null);
+    const [block, setBlock] = useState(null)
     const [room, setRoom] = useState(null)
+    const [year, setYear] = useState(null)
+    const [firstName, setFirstName] = useState(null)
+    const [lastName, setLastName] = useState(null)
     const canOpenAttendance = localStorage.getItem('isOpen') === 'true'
 
     useEffect(() => {
@@ -25,6 +29,9 @@ export const Attendance = () => {
             const response = await getStudentDetails({ email: name })
             setBlock(response.data.block)
             setRoom(response.data.room)
+            setYear(response.data.year)
+            setFirstName(response.data.firstName)
+            setLastName(response.data.lastName)
         } catch (error) {
             console.log(error.message)
         }
@@ -57,6 +64,9 @@ export const Attendance = () => {
             isPresent: isPresent,
             block: block,
             room: room,
+            year: year,
+            firstName: firstName,
+            lastName: lastName,
         }
 
         try {
@@ -66,7 +76,7 @@ export const Attendance = () => {
             localStorage.setItem('attendanceRecorded', 'true')
             setIsPresent(false)
         } catch (error) {
-            toast.error(errorDate.message, {
+            toast.error(error.message, {
                 className: 'bg-green-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
                 icon: <AlertTriangle />,
                 duration: 1000,
