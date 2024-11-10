@@ -32,7 +32,7 @@ export const Student = () => {
     return (
         <div className='h-full w-full mt-28 flex gap-8 flex-wrap justify-center items-start'>
             {studentBlock.map((block, index) => (
-                <div key={index} className="w-[320px] h-[200px] bg-white border border-gray-300 rounded-lg shadow-lg p-5 transition-transform duration-300 hover:scale-105">
+                <div key={index} className="mt-20 w-[320px] h-[200px] bg-white border border-gray-300 rounded-lg shadow-lg p-5 transition-transform duration-300 hover:scale-105">
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center">
                             <div className="h-[50px] w-[50px] bg-[#008000] hover:bg-[#005700] hover:cursor-pointer text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-md" onClick={() => window.location.href = `/admin/${block.url}`} >

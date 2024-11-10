@@ -37,7 +37,7 @@ export const ABlockStudent = () => {
         className: 'bg-red-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
         icon: <Check />,
         duration: 3000,
-      });
+      })
     }
   }
 
@@ -68,8 +68,8 @@ export const ABlockStudent = () => {
     setStudentFormData((prev) => ({
       ...prev,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleEdit = async (e) => {
     e.preventDefault()
@@ -80,7 +80,7 @@ export const ABlockStudent = () => {
           className: 'bg-green-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
           icon: <Check />,
           duration: 3000,
-        });
+        })
         fetchProject()
         setVisibleEdit(false)
       }
@@ -88,7 +88,7 @@ export const ABlockStudent = () => {
       console.log(error.message)
     }
     setVisibleEdit(false)
-  };
+  }
 
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase()
@@ -129,7 +129,9 @@ export const ABlockStudent = () => {
           </div>
         </div>
         <div className='w-full flex gap-5 flex-wrap justify-center items-start'>
-          {filteredData.map((student, index) => (
+          {
+            filteredData.length !== 0 ? (
+            filteredData.map((student, index) => (
             <div key={index} className='w-[320px] border border-gray-300 bg-white rounded-lg shadow-lg p-6 transition-transform duration-200 hover:scale-105'>
               <div className='flex items-center mb-4'>
                 <div className='h-[80px] w-[80px] bg-gray-200 rounded-full flex items-center justify-center mr-4'>
@@ -182,7 +184,14 @@ export const ABlockStudent = () => {
                 </button>
               </div>
             </div>
-          ))}
+          ))
+        ) :(
+          <div className='text-gray-600 text-lg font-medium mt-10'>
+                  No students found in D-Block
+              </div>
+      )
+        }
+          
         </div>
       </div>
 
@@ -326,8 +335,8 @@ export const ABlockStudent = () => {
 )}
 
     </>
-  );
-};
+  )
+}
 
 
 export default ABlockStudent
