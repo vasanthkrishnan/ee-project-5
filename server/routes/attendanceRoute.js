@@ -19,7 +19,7 @@ router.post('/check', async (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
-    const { name, date, isPresent, block, room } = req.body
+    const { name, date, isPresent, block, room, year, firstName, lastName } = req.body
     const timeStamp = new Date()
 
     try {
@@ -28,7 +28,7 @@ router.post('/add', async (req, res) => {
             return res.status(400).json({message: 'Already Recorded'})
         }
         else {
-            attendance = new Attendance({ name, date, isPresent, timeStamp, block, room })
+            attendance = new Attendance({ name, date, isPresent, timeStamp, block, room, year, firstName, lastName })
             await attendance.save()
             return res.status(200).json({message: 'Attendance is Recorded'})
         }
@@ -48,7 +48,7 @@ router.post('/get', async (req, res) => {
         if(!student) {
             return res.status(404).json({ message: "Student not found"})
         }
-        return res.status(200).json({ block: student.block, room: student.room })
+        return res.status(200).json({ block: student.block, room: student.room, year: student.year, firstName: student.firstName,lastName: student.lastName })
     } catch (error) {
         return res.status(500).json({ message: "Server error"})
     }
