@@ -54,4 +54,13 @@ router.post('/get', async (req, res) => {
     }
 })
 
+router.get('/get', async (req, res) => {
+    try {
+        const fetchedData = await Attendance.find()
+        return res.status(200).json(fetchedData)
+    } catch (error) {
+        return res.status(500).json({ message: error.message})
+    }
+})
+
 module.exports = router
