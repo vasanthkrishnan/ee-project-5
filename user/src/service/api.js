@@ -10,5 +10,6 @@ const getStudentDetails = (email) => axios.post(`${Api}/attendance/get`, email)
 
 const checkAttendance = (attendanceData) => axios.post(`${Api}/attendance/check`, attendanceData)
 const addAttendance = (attendanceData) => axios.post(`${Api}/attendance/add`, attendanceData)
+const getAttendanceData = () => axios.get(`${Api}/attendance/get`)
 
-export { addStudentData, getStudentData, deleteStudentData, editStudentData, addAttendance, checkAttendance, getStudentDetails }
+export { addStudentData, getStudentData, deleteStudentData, editStudentData, addAttendance, checkAttendance, getStudentDetails, getAttendanceData }
