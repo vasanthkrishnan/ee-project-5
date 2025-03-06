@@ -5,9 +5,9 @@ const router = express.Router()
 const User = require('../models/loginModel')
 
 // const allowedWifiIp_A = "10.1.5.114"
-const allowedWifiIp_A = "10.1.13.204"
+const allowedWifiIp_A = "192.168.2.126"
 // const allowedWifiIp_C = "10.1.2.238"
-const allowedWifiIp_C = "192.168.168.43"
+const allowedWifiIp_C = "10.1.1.200"
 
 router.post('/', async (req, res) => {
     try {
