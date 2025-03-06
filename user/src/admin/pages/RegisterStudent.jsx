@@ -44,9 +44,9 @@ export const RegisterStudent = () => {
         })
       }
     } catch (error) {
-      toast.error(errorDate.message, {
+      toast.error(error.message, {
         className: 'bg-red-500 rounded-lg shadow-lg text-white p-3 flex gap-5 text-lg font-bold',
-        icon: <AlertTriangle />,
+        // icon: <AlertTriangle />,
         duration: 1000,
       })
     }
